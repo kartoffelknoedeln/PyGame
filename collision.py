@@ -2,8 +2,8 @@ import pygame
 import random
 import numpy as np
 
-MATTER = 5
-ANTIMATTER = 5
+MATTER = 25
+ANTIMATTER = 25
 
 WIDTH = 400
 HEIGHT = 300
