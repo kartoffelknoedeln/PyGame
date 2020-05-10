@@ -2,8 +2,8 @@ import pygame
 import random
 import numpy as np
 
-MATTER = 10
-ANTIMATTER = 10
+MATTER = 20
+ANTIMATTER = 20
 
 WIDTH = 400
 HEIGHT = 300
@@ -81,6 +81,7 @@ def handle_collisions(element_list):
                             del other_elements[other_element_id]
                         if matter_element.size <= 0:
                             del matters[matter_id]
+                            print(len(matters), 'pair(s) of matter/antimatter particles left.')
 
     return matters, antimatters
 
@@ -92,8 +93,9 @@ def draw_environment(element_list):
         for element_id in element_dict:
             element = element_dict[element_id]
             pygame.draw.circle(game_display, element.color, [element.x, element.y], element.size)
-            element.move()
-            element.check_bounds()
+            for speed in range(20):
+                element.move()
+                element.check_bounds()
             
     pygame.display.update()
     return matters, antimatters
@@ -111,7 +113,8 @@ def main():
                 quit()
                 
         matter_elements, antimatter_elements = draw_environment([matter_elements, antimatter_elements])
-        clock.tick(30)
+        clock.tick(60)
 
 if __name__ == '__main__':
     main()
+    
