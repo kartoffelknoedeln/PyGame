@@ -12,7 +12,7 @@ BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 
 game_display = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('...')
+pygame.display.set_caption('Particle collision model')
 clock = pygame.time.Clock()
 
 class Element:
