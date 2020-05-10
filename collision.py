@@ -67,7 +67,7 @@ class AntimatterElement(Element):
 def is_touching(b1, b2):
     return np.linalg.norm(np.array([b1.x, b1.y]) - np.array([b2.x, b2.y])) < (b1.size + b2.size)
 
-def handle_collisions(element_list):
+def handle_collisions(element_list, x_boundary, y_boundary):
     matters, antimatters = element_list
     for matter_id, matter_element, in matters.copy().items():
         for other_elements in matters, antimatters:
@@ -82,6 +82,8 @@ def handle_collisions(element_list):
                         if matter_element.size <= 0:
                             del matters[matter_id]
                             print(len(matters), 'pair(s) of matter/antimatter particles left.')
+                Element.__add__(self, (255, 0, 0), x_boundary, y_boundary)
+                Element.__add__(self, (0, 0, 255), x_boundary, y_boundary)
 
     return matters, antimatters
 
