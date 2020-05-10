@@ -57,7 +57,7 @@ class MatterElement(Element):
         elif other_element.color == (0, 0, 255):
             pass
         else:
-            raise Exception('Tried to combine one or multiple blobs of unsupported colors.')
+            raise Exception('Tried to combine one or multiple elements of unsupported colors.')
 
 class AntimatterElement(Element):
     def __init__(self, x_boundary, y_boundary):
