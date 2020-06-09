@@ -1,9 +1,14 @@
+''' Brownian motion calculation link below '''
+''' https://scipy-cookbook.readthedocs.io/items/BrownianMotion.html '''
+
 import pygame
 import random
+import math
 import numpy as np
+from scipy.stats import norm
 
-MATTER = 25
-ANTIMATTER = 25
+MATTER = 10
+ANTIMATTER = 10
 
 WIDTH = 400
 HEIGHT = 300
@@ -16,18 +21,17 @@ pygame.display.set_caption('Particle collision model')
 clock = pygame.time.Clock()
 
 class Element:
-    def __init__(self, color, x_boundary, y_boundary, size_range = (1, 2), movement_range = (-1, 2)):
+    def __init__(self, color, x_boundary, y_boundary, size_range = (1, 2)):
         self.size = random.randrange(size_range[0], size_range[1])
         self.color = color
         self.x_boundary = x_boundary
         self.y_boundary = y_boundary
         self.x = random.randrange(0, self.x_boundary)
         self.y = random.randrange(0, self.y_boundary)
-        self.movement_range = movement_range
     
-    def move(self):
-        self.move_x = random.randrange(self.movement_range[0], self.movement_range[1])
-        self.move_y = random.randrange(self.movement_range[0], self.movement_range[1])
+    def move(self, delta = 0.25, dt = 0.1, init = 0.0):
+        self.move_x = int(norm.rvs(scale = delta**2 * dt) * 300)
+        self.move_y = int(norm.rvs(scale = delta**2 * dt) * 300)
         self.x += self.move_x
         self.y += self.move_y
 
@@ -57,8 +61,10 @@ class MatterElement(Element):
         elif other_element.color == (0, 0, 255):
             pass
         else:
+            ''' Here to make sure the colours used are actually correct '''
             raise Exception('Tried to combine one or multiple elements of unsupported colors.')
 
+            
 class AntimatterElement(Element):
     def __init__(self, x_boundary, y_boundary):
         Element.__init__(self, (255, 0, 0), x_boundary, y_boundary)
@@ -81,7 +87,6 @@ def handle_collisions(element_list):
                             other_elements[other_element_id] = AntimatterElement(WIDTH, HEIGHT)
                         if matter_element.size <= 0:
                             matters[matter_id] = MatterElement(WIDTH, HEIGHT)
-
     return matters, antimatters
 
 def draw_environment(element_list):
@@ -92,7 +97,7 @@ def draw_environment(element_list):
         for element_id in element_dict:
             element = element_dict[element_id]
             pygame.draw.circle(game_display, element.color, [element.x, element.y], element.size)
-            for speed in range(20):
+            for speed in range(15):
                 element.move()
                 element.check_bounds()
             
@@ -116,4 +121,4 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
+   
