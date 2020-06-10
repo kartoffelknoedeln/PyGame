@@ -29,9 +29,12 @@ class Element:
         self.x = random.randrange(0, self.x_boundary)
         self.y = random.randrange(0, self.y_boundary)
     
-    def move(self, delta = 0.25, dt = 0.1, init = 0.0):
-        self.move_x = int(norm.rvs(scale = delta**2 * dt) * 300)
-        self.move_y = int(norm.rvs(scale = delta**2 * dt) * 300)
+    def move(self, delta = 0.25, dt = 0.1, magnify = 300):
+        self.move_x = int(norm.rvs(scale = delta**2 * dt) * magnify)
+        self.move_y = int(norm.rvs(scale = delta**2 * dt) * magnify)
+        
+        ''' Magnifier to blow up the number so that once it's turned into an integer, it can be read correctly '''
+        
         self.x += self.move_x
         self.y += self.move_y
 
