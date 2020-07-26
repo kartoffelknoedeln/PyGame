@@ -170,8 +170,6 @@ class Pokemon:
             string_attack = ''
             type_adv = 1
 
-##---
-
             index = self.partyAttack(oppoPokemon)        
             time.sleep(1)
             self.partyDamageCalculation(oppoPokemon, index)
@@ -181,8 +179,6 @@ class Pokemon:
             if oppoPokemon.health <= 0:
                 gameboy_printing("\n... " + oppoPokemon.names + ' fainted!')
                 break
-
-##---
             
             self.MewtwoMakesMove(oppoPokemon, string_attack, type_adv)
             time.sleep(1)
@@ -191,8 +187,6 @@ class Pokemon:
             if self.health <= 0:
                 gameboy_printing("\n... " + self.names + ' fainted!\n')
                 self.battle = False
-
-##---
                 
         if not self.health <= 0:
             exp = np.random.choice(10000)
