@@ -1,10 +1,5 @@
 # Miscellaneous
-The topics at hand will be:
-- Pandas/Jupyter
-  - Pokemon data
-  - Sales data
+More sandbox than anything else. Current residences are:
 - Python
   - Matter/Antimatter collision
   - Mewtwo battle simulator
-  - (Beautiful Soup)
-  - (Selenium)
